@@ -165,6 +165,7 @@
     buildHTML: function () {
       this.$restart = $("button.restart-game");
       this.$restart.on("click", function () {
+        $('.game').empty();
         Memory.$startGame.fadeIn();
         Memory.$gamewrap.fadeOut();
         this.$cards = $(Memory.shuffle(this.cardsArray));
