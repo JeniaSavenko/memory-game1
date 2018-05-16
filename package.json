@@ -18,7 +18,8 @@
     "gulp-sass": "^4.0.1",
     "gulp-uglifyjs": "^0.6.2",
     "jquery": "^3.3.1",
-    "soundmanager2": "^2.97.20170602"
+    "soundmanager2": "^2.97.20170602",
+    "write-json-file": "^2.3.0"
   },
   "devDependencies": {},
   "repository": {

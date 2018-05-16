@@ -14,9 +14,9 @@
       this.$gamewrap = $('.game-wrap');
       this.$gamewrap.hide();
       this.$buttonStart.on("click", function () {
-        var inpt = $(".player-name");
+        var inpt = $(".player-name").val();
         var player = $(".player");
-        player.html(inpt.val());
+        player.html('Player name: ' +inpt);
         Memory.$startGame.fadeOut();
         Memory.$gamewrap.fadeIn();
         Memory.setup();
@@ -110,10 +110,39 @@
       this.paused = true;
       var result = sec;
       $('.result').html('Ваш результат '+ result + ' секунд');
+
+      var inpt = $(".player-name").val();
+      var save = localStorage.getItem("save");
+
+      var records = {};
+
+      if(save){
+        records = JSON.parse(save);
+      }
+
+     records = {
+        'name':inpt,
+        'result':result
+      };
+
+
+      localStorage.setItem("save", JSON.stringify(records));
+
+
+
+
+
+    /*  const writeJsonFile = require('write-json-file');
+      writeJsonFile('records.json', {'name': inpt, 'result': result}).then(() => {
+        console.log('done');
+      });*/
+
+
       setTimeout(function () {
         Memory.showModal();
         Memory.$game.fadeOut();
       }, 1000);
+
     },
 
     showModal: function () {
@@ -246,6 +275,10 @@
   ];
 
   Memory.init();
+
+
+
+
 
 
 })();
