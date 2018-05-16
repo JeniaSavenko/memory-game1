@@ -1,27 +1,19 @@
-
 (function () {
 
 
   var Memory;
   Memory = {
 
-    init: function (cards) {
+    init: function () {
       this.$game = $(".game");
       this.$modal = $(".modal");
       this.$overlay = $(".modal-overlay");
       this.$restartButton = $("button.restart");
-
       this.$startGame = $(".start-game");
       this.$buttonStart = $(".start");
       this.$gamewrap = $('.game-wrap');
       this.$gamewrap.hide();
-
-
-
-
       this.$buttonStart.on("click", function () {
-
-
         var inpt = $(".player-name");
         var player = $(".player");
         player.html(inpt.val());
@@ -33,24 +25,24 @@
       });
     },
 
-   /* shuffleCards: function () {
-
-    },*/
-
     setup: function () {
-
-      if($('input:radio[name=check]:checked').val() == '1'){
+      if ($('input:radio[name=check]:checked').val() == '1') {
         this.cardsArray = $.merge(cards.slice(6), cards.slice(6));
         this.$cards = $(Memory.shuffle(this.cardsArray));
 
-      } else if ($('input:radio[name=check]:checked').val() == '2'){
+      }
+      else if ($('input:radio[name=check]:checked').val() == '2') {
+
         this.cardsArray = $.merge(cards.slice(4), cards.slice(4));
         this.$cards = $(Memory.shuffle(this.cardsArray));
 
-      } else if($('input:radio[name=check]:checked').val() == '3'){
-        this.cardsArray = $.merge(cards, cards);
+      }
+      else if ($('input:radio[name=check]:checked').val() == '3') {
+
+        this.cardsArray = $.merge(cards.slice(), cards.slice());
         this.$cards = $(Memory.shuffle(this.cardsArray));
-      }else{
+      }
+      else {
         alert('надо что то выбрать');
         Memory.$startGame.fadeIn();
         Memory.$gamewrap.fadeOut();
@@ -58,8 +50,6 @@
         // Memory.shuffleCards(this.cardsArray);
         Memory.setup();
       }
-
-
       this.html = this.buildHTML();
       this.$game.html(this.html);
 
@@ -73,10 +63,9 @@
       this.$memoryCards.on("click", this.cardClicked);
       this.$restartButton.on("click", $.proxy(this.reset, this));
     },
+
     // kinda messy but hey
     cardClicked: function () {
-
-
       var mySound;
       mySound = soundManager.createSound({
         url: 'src/sound/Sound.mp3'
@@ -119,6 +108,8 @@
       });
       mySound.play();
       this.paused = true;
+      var result = sec;
+      $('.result').html('Ваш результат '+ result + ' секунд');
       setTimeout(function () {
         Memory.showModal();
         Memory.$game.fadeOut();
@@ -136,10 +127,9 @@
     },
 
     reset: function () {
-     init();
+      init();
       this.hideModal();
       this.$cards = $(Memory.shuffle(this.cardsArray));
-      //this.shuffleCards(this.cardsArray);
       this.setup();
       this.$game.show("slow");
     },
@@ -164,16 +154,18 @@
 
     buildHTML: function () {
       this.$restart = $("button.restart-game");
+      console.log(Memory.$cards.length)
       this.$restart.on("click", function () {
-        $('.game').empty();
+       $('.game').empty();
         Memory.$startGame.fadeIn();
         Memory.$gamewrap.fadeOut();
         this.$cards = $(Memory.shuffle(this.cardsArray));
-       // Memory.shuffleCards(this.cardsArray);
         Memory.setup();
         clearInterval(tick);
       });
-      var frag = '';
+
+      var frag;
+      frag = '';
       this.$cards.each(function (k, v) {
         // language=HTML
         frag += '<div class="card" data-id="' + v.id + '"><div class="inside">\
@@ -189,11 +181,11 @@
 
 
   var cards = [
+
     {
       name: "php",
       img: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/php-logo_1.png",
-        img2: "src/image/shirt.jpg",
-      id: 1,
+      id: 1
     },
     {
       name: "css3",
@@ -249,32 +241,29 @@
       name: "wordpress",
       img: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/wordpress-logo.png",
       id: 12
-    },
-      
+    }
+
   ];
 
-  Memory.init(cards);
+  Memory.init();
 
 
 })();
 
 var timer;
 
-function init()
-{
+function init() {
 
-  if(timer){
+  if (timer) {
     clearInterval(timer);
   }
   sec = 0;
   timer = setInterval(tick, 1000);
 }
 
-function tick()
-{
+function tick() {
   sec++;
-  document.getElementById("timer").
-      childNodes[0].nodeValue = sec;
+  document.getElementById("timer").childNodes[0].nodeValue = sec;
 }
 
 

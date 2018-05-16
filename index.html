@@ -25,12 +25,12 @@
 
 
         <div class="chooseTheme">Yo can choose a theme <br>
-            <input type=button class="firstStyle" onclick='style1()'
-                   value='First'><br />
-            <input type=button class="secondStyle" onclick='style2()'
-                   value='Second'><br />
-            <input type=button class="thirdStyle" onclick='style3()'
-                   value='Third'><br />
+            <input name="theme" id="themeRadio1" type="radio" value="1">
+            <label for="themeRadio1">first</label>
+            <input name="theme" id="themeRadio2" type="radio" value="2">
+            <label for="themeRadio2">second</label>
+            <input name="theme" id="themeRadio3" type="radio" value="3">
+            <label for="themeRadio3">third</label>
         </div>
 
     </div>
@@ -52,6 +52,7 @@
     <div class="modal-overlay">
         <div class="modal">
             <h2 class="winner">YOU WIN!</h2>
+            <div class="result"></div>
             <button class="restart">Play Again?</button>
             <p class="share-text">Share it?</p>
             <ul class="social">
@@ -73,7 +74,6 @@
 </div><!-- End Wrap -->
 <script src="dist/libs/soundmanager2-jsmin.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="dist/js/scripts.min.js"></script>
-<script src="src/js/changeTheme.js"></script>
+<script src="src/js/script.js"></script>
 </body>
 </html>
