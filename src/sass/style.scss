@@ -2,19 +2,20 @@
   box-sizing:border-box
 }
 body,html{
-  //height:100%;
+  height:100%;
 }
 body{
+  display: flex;
   height: 80%;
-  //width: 100%;
+  width: 100%;
   min-height:100%;
   font-family:Arial,sans-serif;
   background-color:#e5e5e5;
 }
 .wrap{
   position:relative;
-  height:100%;
- // width: 100%;
+  height:80%;
+  width: 100%;
   min-height:500px;
   margin: 20px;
 }
@@ -43,6 +44,7 @@ body{
   position:relative;
   cursor:pointer;
   z-index:1;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 @media (max-width:800px){
   .card{
@@ -65,6 +67,7 @@ body{
   animation-delay:.4s
 }
 .card .back,.card .front{
+  -webkit-backface-visibility:hidden;
   backface-visibility:hidden;
   position:absolute;
   top:0;
@@ -236,8 +239,11 @@ footer .disclaimer{
   height: 90%;
   display:-ms-flexbox;
   display:flex;
+  -ms-flex-direction:column;
   flex-direction:column;
+  -ms-flex-align:center;
   align-items:center;
+  -ms-flex-pack:center;
   justify-content:center;
 }
 .name-label{
@@ -312,9 +318,17 @@ footer .disclaimer{
   transition: all .2s ease;
 }
 .restart-game:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
   transform: scale(1.1);
 }
 .start:hover{
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
   transform: scale(1.1);
   background:linear-gradient(#222,#000)
 }
