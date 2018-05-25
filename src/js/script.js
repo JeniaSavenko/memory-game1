@@ -1,6 +1,6 @@
 (function () {
 
-
+  var selectShirts;
   var Memory;
   Memory = {
 
@@ -26,20 +26,45 @@
     },
 
     setup: function () {
+
+      var selectCards = [];
+
+
+
+
+
+      if ($('input:radio[name=theme]:checked').val() == '1') {
+        selectCards = cards1.slice();
+        selectShirts = "src/image/shirt.jpg";
+      }
+      else if ($('input:radio[name=theme]:checked').val() == '2') {
+        selectCards = cards2.slice();
+        selectShirts = "src/image/shirt.jpg";
+
+      }
+      else if ($('input:radio[name=theme]:checked').val() == '3') {
+        selectCards = cards3.slice();
+        selectShirts = "src/image/social/Social-Icons-Transparent-Background.png"
+
+      }
+
+
+
+
       if ($('input:radio[name=check]:checked').val() == '1') {
-        this.cardsArray = $.merge(cards.slice(6), cards.slice(6));
+        this.cardsArray = $.merge(selectCards.slice(6), selectCards.slice(6));
         this.$cards = $(Memory.shuffle(this.cardsArray));
 
       }
       else if ($('input:radio[name=check]:checked').val() == '2') {
 
-        this.cardsArray = $.merge(cards.slice(4), cards.slice(4));
+        this.cardsArray = $.merge(selectCards.slice(4), selectCards.slice(4));
         this.$cards = $(Memory.shuffle(this.cardsArray));
 
       }
       else if ($('input:radio[name=check]:checked').val() == '3') {
 
-        this.cardsArray = $.merge(cards.slice(), cards.slice());
+        this.cardsArray = selectCards.concat(selectCards);
         this.$cards = $(Memory.shuffle(this.cardsArray));
       }
       else {
@@ -114,10 +139,11 @@
       var inpt = $(".player-name").val();
       var save = localStorage.getItem("save");
 
-      var records = {};
+      var oldRecords = {},
+          records = {};
 
       if(save){
-        records = JSON.parse(save);
+        oldRecords = JSON.parse(save);
       }
 
      records = {
@@ -126,17 +152,20 @@
       };
 
 
-      localStorage.setItem("save", JSON.stringify(records));
+      $('.pre-result').html('Ваш предыдущий рекорд '+ oldRecords.result + ' секунд');
 
 
-
+      if(records.result < oldRecords.result){
+        localStorage.setItem("save", JSON.stringify(records));
+      }else {
+        localStorage.setItem("save", JSON.stringify(oldRecords));
+      }
 
 
     /*  const writeJsonFile = require('write-json-file');
       writeJsonFile('records.json', {'name': inpt, 'result': result}).then(() => {
         console.log('done');
       });*/
-
 
       setTimeout(function () {
         Memory.showModal();
@@ -183,7 +212,6 @@
 
     buildHTML: function () {
       this.$restart = $("button.restart-game");
-      console.log(Memory.$cards.length)
       this.$restart.on("click", function () {
        $('.game').empty();
         Memory.$startGame.fadeIn();
@@ -200,7 +228,7 @@
         frag += '<div class="card" data-id="' + v.id + '"><div class="inside">\
        <div class="front"><img src="' + v.img + '"\
 				alt="' + v.name + '" /></div>\
-	   <div class="back"><img src="src/image/shirt.jpg"\
+	   <div class="back"><img src="' + selectShirts + '"\
 				alt="shirt" /></div></div>\
 	   </div>';
       });
@@ -209,7 +237,7 @@
   };
 
 
-  var cards = [
+  var cards1 = [
 
     {
       name: "php",
@@ -273,13 +301,136 @@
     }
 
   ];
+  var cards2 = [
+
+    {
+      name: "honda",
+      img: "src/image/car-brands/top-car-brands_01.png",
+      id: 1
+    },
+    {
+      name: "mazda",
+      img: "src/image/car-brands/top-car-brands_02.png",
+      id: 2
+    },
+    {
+      name: "nissan",
+      img: "src/image/car-brands/top-car-brands_03.png",
+      id: 3
+    },
+    {
+      name: "toyota",
+      img: "src/image/car-brands/top-car-brands_04.png",
+      id: 4
+    },
+    {
+      name: "mitsubishi",
+      img: "src/image/car-brands/top-car-brands_05.png",
+      id: 5
+    },
+    {
+      name: "bmw",
+      img: "src/image/car-brands/top-car-brands_06.png",
+      id: 6
+    },
+    {
+      name: "audi",
+      img: "src/image/car-brands/top-car-brands_07.png",
+      id: 7
+    },
+    {
+      name: "mercedes",
+      img: "src/image/car-brands/top-car-brands_08.png",
+      id: 8
+    },
+    {
+      name: "jeep",
+      img: "src/image/car-brands/top-car-brands_09.png",
+      id: 9
+    },
+    {
+      name: "volvo",
+      img: "src/image/car-brands/top-car-brands_10.png",
+      id: 10
+    },
+    {
+      name: "mini",
+      img: "src/image/car-brands/top-car-brands_11.png",
+      id: 11
+    },
+    {
+      name: "bentley",
+      img: "src/image/car-brands/top-car-brands_12.png",
+      id: 12
+    }
+
+  ];
+  var cards3 = [
+
+    {
+      name: "php",
+      img: "src/image/social/1.svg",
+      id: 1
+    },
+    {
+      name: "css3",
+      img: "src/image/social/2.svg",
+      id: 2
+    },
+    {
+      name: "html5",
+      img: "src/image/social/3.svg",
+      id: 3
+    },
+    {
+      name: "jquery",
+      img: "src/image/social/4.svg",
+      id: 4
+    },
+    {
+      name: "javascript",
+      img: "src/image/social/5.svg",
+      id: 5
+    },
+    {
+      name: "node",
+      img: "src/image/social/6.svg",
+      id: 6
+    },
+    {
+      name: "photoshop",
+      img: "src/image/social/7.svg",
+      id: 7
+    },
+    {
+      name: "python",
+      img: "src/image/social/8.svg",
+      id: 8
+    },
+    {
+      name: "rails",
+      img: "src/image/social/9.svg",
+      id: 9
+    },
+    {
+      name: "sass",
+      img: "src/image/social/10.svg",
+      id: 10
+    },
+    {
+      name: "sublime",
+      img: "src/image/social/11.svg",
+      id: 11
+    },
+    {
+      name: "wordpress",
+      img: "src/image/social/12.svg",
+      id: 12
+    }
+
+  ];
 
   Memory.init();
-
-
-
-
-
 
 })();
 

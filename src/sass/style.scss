@@ -353,6 +353,10 @@ footer .disclaimer{
   background:linear-gradient(#4d4d4d,#222);
   color:#fff;
 }
-.result{
+.result,
+.pre-result{
   text-align: center;
+}
+.pre-result{
+  margin-bottom: 10px;
 }
