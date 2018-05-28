@@ -29,10 +29,6 @@
 
       var selectCards = [];
 
-
-
-
-
       if ($('input:radio[name=theme]:checked').val() == '1') {
         selectCards = cards1.slice();
         selectShirts = "src/image/shirt.jpg";
@@ -45,11 +41,7 @@
       else if ($('input:radio[name=theme]:checked').val() == '3') {
         selectCards = cards3.slice();
         selectShirts = "src/image/social/Social-Icons-Transparent-Background.png"
-
       }
-
-
-
 
       if ($('input:radio[name=check]:checked').val() == '1') {
         this.cardsArray = $.merge(selectCards.slice(6), selectCards.slice(6));
@@ -161,11 +153,6 @@
         localStorage.setItem("save", JSON.stringify(oldRecords));
       }
 
-
-    /*  const writeJsonFile = require('write-json-file');
-      writeJsonFile('records.json', {'name': inpt, 'result': result}).then(() => {
-        console.log('done');
-      });*/
 
       setTimeout(function () {
         Memory.showModal();
